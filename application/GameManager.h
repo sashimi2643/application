@@ -20,9 +20,12 @@ private:
     GameManager();
     void UpdateState();
 
-    void ShowTitle();
-    void Explore();
-    void StartBattle();
+    void ViewTitle();
+    void ControllerTitle();
+    void ViewExplore();
+    void ControllerExplore();
+    void ViewStartBattle();
+    void CtrlStartBattle();
     void Battle();
     void ShowClear();
     void ShowGameOver();

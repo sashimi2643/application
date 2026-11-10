@@ -25,8 +25,8 @@ void GameManager::UpdateState()
 {
     // 状態ごとに処理を分ける有限状態機械（FSM）
     switch (state_) {
-    case GameState::Title:   ShowTitle();    break;
-    case GameState::Explore: Explore();      break;
+    case GameState::Title:   ControllerTitle();      break;
+    case GameState::Explore: ControllerExplore();    break;
     case GameState::Battle:  Battle();       break;
     case GameState::Clear:   ShowClear();    break;
     case GameState::GameOver:ShowGameOver(); break;
@@ -50,13 +50,20 @@ int GameManager::ReadChoice(int min, int max)
     }
 }
 
-void GameManager::ShowTitle()
+// タイトルの見せる担当
+void GameManager::ViewTitle()
 {
     std::cout << "\n==============================\n"
         << "      ダンジョン探索記\n"
         << "==============================\n"
         << "1. はじめから\n"
         << "2. 終了\n";
+}
+// タイトルの指示の担当
+void GameManager::ControllerTitle()
+{
+    ViewTitle();
+
     const int choice = ReadChoice(1, 2);
 
     if (choice == 1) {
@@ -70,17 +77,24 @@ void GameManager::ShowTitle()
     }
 }
 
-void GameManager::Explore()
+// 探索中の見せる担当
+void GameManager::ViewExplore()
 {
     std::cout << "\n--- 探索中 ---\n"
         << "討伐数: " << defeatedEnemies_ << "/3\n"
         << "1. ダンジョンを探索する\n"
         << "2. ステータスを見る\n"
         << "3. タイトルに戻る\n";
+}
+// 探索中の指示の担当
+void GameManager::ControllerExplore()
+{
+    ViewExplore();
+
     const int choice = ReadChoice(1, 3);
 
     if (choice == 1) {
-        StartBattle();
+        CtrlStartBattle();
     }
     else if (choice == 2) {
         ShowStatus();
@@ -90,10 +104,16 @@ void GameManager::Explore()
     }
 }
 
-void GameManager::StartBattle()
+// バトル開始画面の見せる担当
+void GameManager::ViewStartBattle()
+{
+    std::cout << "\n！ " << enemy_->GetName() << " が現れた！\n";
+}
+// バトル開始画面の指示の担当
+void GameManager::CtrlStartBattle()
 {
     enemy_ = enemyFactory_.CreateRandomEnemy();
-    std::cout << "\n！ " << enemy_->GetName() << " が現れた！\n";
+    ViewStartBattle();
     state_ = GameState::Battle;
 }
 
