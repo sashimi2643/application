@@ -97,7 +97,7 @@ void GameManager::ControllerExplore()
         CtrlStartBattle();
     }
     else if (choice == 2) {
-        ShowStatus();
+        ViewStatus();
     }
     else {
         state_ = GameState::Title;
@@ -182,7 +182,7 @@ void GameManager::Battle()
     }
 }
 
-void GameManager::ShowStatus()
+void GameManager::ViewStatus()
 {
     std::cout << "\n--- ステータス ---\n"
         << "名前: " << player_.GetName() << "\n"
@@ -195,7 +195,8 @@ void GameManager::ShowStatus()
         << "ログプールの確保数: " << combatLog_.Capacity() << "\n";
 }
 
-void GameManager::ShowClear()
+// クリア画面の見せる担当
+void GameManager::ViewClear()
 {
     std::cout << "\n******************************\n"
         << "       DUNGEON CLEAR!\n"
@@ -205,19 +206,26 @@ void GameManager::ShowClear()
         << "******************************\n"
         << "1. タイトルへ戻る\n"
         << "2. 終了\n";
+}
+
+// クリア画面の指示の担当
+void GameManager::CtrlClear()
+{
+    ViewClear();
     const int choice = ReadChoice(1, 2);
     state_ = (choice == 1) ? GameState::Title : GameState::Exit;
 }
 
+// ゲームオーバー画面の見せる担当
 void GameManager::ViewGameOver()
 {
     std::cout << "\n========== GAME OVER ==========\n"
         << "冒険はここで終わってしまった……\n"
         << "1. もう一度挑戦\n"
         << "2. 終了\n";
-    
-   
 }
+
+// ゲームオーバー画面の指示の担当
 void GameManager::CtrlGameOver()
 {
     ViewGameOver();

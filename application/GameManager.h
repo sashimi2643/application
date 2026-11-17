@@ -31,7 +31,7 @@ private:
     void CtrlClear();
     void ViewGameOver();
     void CtrlGameOver();
-    void ShowStatus();
+    void ViewStatus();
     int ReadChoice(int min, int max);
 
     GameState state_;
