@@ -27,7 +27,8 @@ private:
     void ViewStartBattle();
     void CtrlStartBattle();
     void Battle();
-    void ShowClear();
+    void ViewClear();
+    void CtrlClear();
     void ViewGameOver();
     void CtrlGameOver();
     void ShowStatus();

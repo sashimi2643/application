@@ -28,7 +28,7 @@ void GameManager::UpdateState()
     case GameState::Title:   ControllerTitle();      break;
     case GameState::Explore: ControllerExplore();    break;
     case GameState::Battle:  Battle();       break;
-    case GameState::Clear:   ShowClear();    break;
+    case GameState::Clear:   CtrlClear();    break;
     case GameState::GameOver:CtrlGameOver(); break;
     case GameState::Exit:    break;
     }
