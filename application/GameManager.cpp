@@ -29,7 +29,7 @@ void GameManager::UpdateState()
     case GameState::Explore: ControllerExplore();    break;
     case GameState::Battle:  Battle();       break;
     case GameState::Clear:   ShowClear();    break;
-    case GameState::GameOver:ShowGameOver(); break;
+    case GameState::GameOver:CtrlGameOver(); break;
     case GameState::Exit:    break;
     }
 }
@@ -209,12 +209,18 @@ void GameManager::ShowClear()
     state_ = (choice == 1) ? GameState::Title : GameState::Exit;
 }
 
-void GameManager::ShowGameOver()
+void GameManager::ViewGameOver()
 {
     std::cout << "\n========== GAME OVER ==========\n"
         << "冒険はここで終わってしまった……\n"
         << "1. もう一度挑戦\n"
         << "2. 終了\n";
+    
+   
+}
+void GameManager::CtrlGameOver()
+{
+    ViewGameOver();
     const int choice = ReadChoice(1, 2);
     if (choice == 1) {
         player_.RestoreForNewGame();

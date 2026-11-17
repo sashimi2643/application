@@ -28,7 +28,8 @@ private:
     void CtrlStartBattle();
     void Battle();
     void ShowClear();
-    void ShowGameOver();
+    void ViewGameOver();
+    void CtrlGameOver();
     void ShowStatus();
     int ReadChoice(int min, int max);
 
